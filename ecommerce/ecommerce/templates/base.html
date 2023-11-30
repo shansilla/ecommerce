@@ -1,0 +1,50 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- Include the Google Font link -->
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+            <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/87affe97a6.js" crossorigin="anonymous"></script>
+    <meta name="description" content="{% block metadescription %} {% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+     <!-- Other head elements -->
+    <style>
+        body {
+              margin: 10px; /* Reset body margin with a unit (e.g., pixels) */
+            }
+
+            .container {
+              max-width: 1200px; /* Set your desired max-width with a unit */
+              margin: 20px auto; /* Add margin around the container */
+              padding: 0 20px; /* Optional padding inside the container */
+            }
+
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <div>
+        {% include 'header.html' %}
+        {% include 'nav.html' %}
+        {% block content %} {% endblock %}
+        {% include 'footer.html' %}
+
+
+
+
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+
+</html>

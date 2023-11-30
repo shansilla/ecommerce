@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    {% if category %}
+        {{ category.description|truncatewords:155 }}
+    {% else %}
+        Welcome to ABS Store where you can buy everything.
+    {% endif %}
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+        {{ category.name }} - ABC Shop
+    {% else %}
+        See our New Collections - ABC Shop
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #E5E7E9; /* Set your desired background color */
+        }
+    </style>
+
+    {% if category %}
+        <div>
+            <div class="row my_row_class">
+                <div class="mx-auto">
+                <p><a href="{% url 'shop:allProdCat' %}"><h4>We stored for you</h4></a></p>
+            </div>
+                </div>
+        </div>
+    {% endif %}
+        <div class="mx_auto">
+     {% if category %}
+            <img class="my_image" src="{{ category.image.url }}" alt="{{ category.name }}">
+        </div>
+        <br>
+        <div>
+            <h1 class="text-center my-title">{{ category.name }}</h1>
+            <p class="text-justify">{{ category.description }}</p>
+        </div>
+
+    {% else %}
+        <div class="container">
+                <div class="row">
+            <img class="my_image my_image_padding" src="{% static 'img/banner.png' %}" alt="Our products" width="1640px;">
+        </div>
+        <br>
+        <div>
+             <h1 class="text-center my_title">"Redefining the Shopping Experience at ABC Shop: <br>A Commitment to Quality and Innovation"</h1>
+            <style>
+            .text-justify {
+                text-indent: 50px; /* Set the desired starting tab space */
+                text-align: justify; /* Apply justification if needed */
+                 }
+            </style>
+             <p class="text-justify">"The ABC Shop, we redefine the shopping experience by offering a curated selection of premium products tailored to meet your lifestyle needs. Our passion for quality and innovation drives us to source the latest trends, ensuring that you stay ahead in style. From fashion-forward apparel to cutting-edge electronics and stylish home decor, we bring you a diverse range of products that reflect your unique taste. At the heart of our mission is a commitment to delivering excellence in both products and service. Explore the world of ABC Shop and discover a shopping destination where every purchase is an expression of your individuality."
+             </p>
+
+        </div>
+    {% endif %}
+    <div class="container">
+    <div class="row max_auto">
+        {% for product in products.object_list %}
+        <div class="my_bottom_margin col-9 col-sm-12 col-md-4 xol-lg-4">
+            <div class="card text-center" style="min-width:18rem;">
+                <a href="{{product.get_urls}}"><img class="card-img-top my_image" src="{{ product.image.url }}" alt="{{ product.name }}"></a>
+
+                <div class="card-body">
+                    <h4>{{ product.name }}</h4>
+                    <p>₹ {{ product.price }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="mx-auto">
+        {% if products.paginator.nun_pages > 1 %}
+        {% endif %} <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+                <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+</div>
+
+     {% endblock %}
